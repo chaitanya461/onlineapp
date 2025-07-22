@@ -62,3 +62,42 @@ sudo chown -R apache:apache /var/www/html
 sudo chmod -R 755 /var/www/html
 
 sudo systemctl restart httpd
+
+---------–_----------------------------------------------------------++++++----------------
+--(setup_db.php)
+<?php
+require 'config.php';
+
+try {
+    // Create phones table
+    $sql = "CREATE TABLE IF NOT EXISTS phones (
+        id SERIAL PRIMARY KEY,
+        model VARCHAR(100) NOT NULL,
+        brand VARCHAR(50) NOT NULL,
+        price DECIMAL(10,2) NOT NULL,
+        specs TEXT,
+        image_url VARCHAR(255),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )";
+    
+    $pdo->exec($sql);
+    
+    // Create admin users table
+    $sql = "CREATE TABLE IF NOT EXISTS admin_users (
+        id SERIAL PRIMARY KEY,
+        username VARCHAR(50) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )";
+    
+    $pdo->exec($sql);
+    
+    echo "Database tables created successfully!";
+    
+} catch (PDOException $e) {
+    die("Error creating tables: " . $e->getMessage());
+}
+?>
+
+
+php setup_db.php

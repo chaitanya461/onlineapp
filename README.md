@@ -31,3 +31,34 @@ EOL
 
 php create_admin.php
 rm create_admin.php  # Remove the file after use for security
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+sudo dnf update -y
+sudo dnf install -y httpd php php-pgsql php-mbstring php-xml php-cli php-json unzip git curl
+
+sudo dnf install -y httpd
+sudo systemctl start httpd
+sudo systemctl enable httpd
+
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+
+aws sts get-caller-identity
+
+
+cd /var/www/html
+sudo dnf install -y composer
+composer require aws/aws-sdk-php
+
+sudo chown -R ec2-user:ec2-user /var/www/html
+cd /var/www/html
+composer require aws/aws-sdk-php
+
+sudo dnf install php-pgsql
+
+
+sudo chown -R apache:apache /var/www/html
+sudo chmod -R 755 /var/www/html
+
+sudo systemctl restart httpd

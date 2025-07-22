@@ -1,14 +1,14 @@
 <?php
 // Database configuration
-define('DB_HOST', 'your-rds-endpoint.rds.amazonaws.com');
+define('DB_HOST', 'database-1.cwdkc2q88d2r.us-east-1.rds.amazonaws.com');
 define('DB_PORT', '5432');
 define('DB_NAME', 'dynamic1');
-define('DB_USER', 'progres');
+define('DB_USER', 'postgres');
 define('DB_PASS', 'Satyasai17');
 
 // AWS S3 configuration
 define('AWS_REGION', 'us-east-1');
-define('S3_BUCKET', 'your-bucket-name');
+define('S3_BUCKET', 'onlineapplications3 ');
 
 // Initialize AWS SDK
 require 'vendor/autoload.php';

@@ -44,11 +44,16 @@ curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip
 unzip awscliv2.zip
 sudo ./aws/install
 
-aws sts get-caller-identity
+aws sts get-caller-identity 
 
+sudo chown -R apache:apache /var/www/html
+sudo chmod 2775 /var/www/html
+find /var/www/html -type d -exec sudo chmod 2775 {} \;
+find /var/www/html -type f -exec sudo chmod 0664 {} \;
 
 cd /var/www/html
 sudo dnf install -y composer
+
 composer require aws/aws-sdk-php
 
 sudo chown -R ec2-user:ec2-user /var/www/html
